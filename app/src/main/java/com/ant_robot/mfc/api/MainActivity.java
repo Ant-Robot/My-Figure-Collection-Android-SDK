@@ -1,22 +1,25 @@
-package com.ant_robot.mfcapi;
+package com.ant_robot.mfc.api;
 
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+
+import com.ant_robot.mfc.api.pojo.UserCollection;
+import com.ant_robot.mfc.api.request.MFCRequest;
+import com.ant_robot.mfcapi.R;
+
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends ActionBarActivity
@@ -100,6 +103,14 @@ public class MainActivity extends ActionBarActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            MFCRequest.INSTANCE.getCollectionService().getCollection("climbatize").observeOn(Schedulers.newThread())
+                    .subscribe(new Action1<UserCollection>() {
+
+                        @Override
+                        public void call(UserCollection userCollection) {
+                            Log.d("test", userCollection.toString());
+                        }
+                    });
             return true;
         }
 
@@ -135,6 +146,7 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
             return rootView;
         }
 

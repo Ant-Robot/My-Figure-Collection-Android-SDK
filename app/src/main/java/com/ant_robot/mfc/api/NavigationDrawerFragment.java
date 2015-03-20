@@ -1,4 +1,4 @@
-package com.ant_robot.mfcapi;
+package com.ant_robot.mfc.api;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
@@ -21,6 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.ant_robot.mfcapi.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.

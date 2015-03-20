@@ -14,7 +14,7 @@ public class Data {
     @Expose
     private String id;
     @Expose
-    private Barcode barcode;
+    private String barcode;
     @Expose
     private String name;
     @SerializedName("release_date")
@@ -51,7 +51,7 @@ public class Data {
      * @return
      *     The barcode
      */
-    public Barcode getBarcode() {
+    public String getBarcode() {
         return barcode;
     }
 
@@ -60,11 +60,11 @@ public class Data {
      * @param barcode
      *     The barcode
      */
-    public void setBarcode(Barcode barcode) {
+    public void setBarcode(String barcode) {
         this.barcode = barcode;
     }
 
-    public Data withBarcode(Barcode barcode) {
+    public Data withBarcode(String barcode) {
         this.barcode = barcode;
         return this;
     }

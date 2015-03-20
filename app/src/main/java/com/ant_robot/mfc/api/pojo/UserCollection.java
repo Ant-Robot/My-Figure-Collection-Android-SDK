@@ -8,7 +8,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
-public class UserCollectionOwned {
+public class UserCollection {
 
     @Expose
     private String name;
@@ -35,7 +35,7 @@ public class UserCollectionOwned {
         this.name = name;
     }
 
-    public UserCollectionOwned withName(String name) {
+    public UserCollection withName(String name) {
         this.name = name;
         return this;
     }
@@ -58,7 +58,7 @@ public class UserCollectionOwned {
         this.version = version;
     }
 
-    public UserCollectionOwned withVersion(String version) {
+    public UserCollection withVersion(String version) {
         this.version = version;
         return this;
     }
@@ -81,7 +81,7 @@ public class UserCollectionOwned {
         this.collection = collection;
     }
 
-    public UserCollectionOwned withCollection(Collection collection) {
+    public UserCollection withCollection(Collection collection) {
         this.collection = collection;
         return this;
     }
@@ -101,10 +101,10 @@ public class UserCollectionOwned {
         if (other == this) {
             return true;
         }
-        if ((other instanceof UserCollectionOwned) == false) {
+        if ((other instanceof UserCollection) == false) {
             return false;
         }
-        UserCollectionOwned rhs = ((UserCollectionOwned) other);
+        UserCollection rhs = ((UserCollection) other);
         return new EqualsBuilder().append(name, rhs.name).append(version, rhs.version).append(collection, rhs.collection).isEquals();
     }
 

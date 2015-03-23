@@ -1,4 +1,28 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+//./gradlew clean build publish
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "source"
+}
+
+publishing {
+    publications {
+        bar(MavenPublication) {
+            groupId 'com.ant_robot'
+            artifactId 'mfc.api'
+            version '0.0.4'
+            artifact(sourceJar)
+            artifact("$buildDir/outputs/aar/bar-release.aar")
+        }
+    }
+    repositories {
+        maven {
+            url "$buildDir/repo"
+        }
+    }
+}
 
 android {
     compileSdkVersion 21
@@ -8,7 +32,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
+        versionName "Reborn"
     }
     buildTypes {
         release {

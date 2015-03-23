@@ -1,11 +1,12 @@
-
 package com.ant_robot.mfc.api.pojo;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Collection {
@@ -16,18 +17,14 @@ public class Collection {
     private Owned owned;
 
     /**
-     * 
-     * @return
-     *     The link
+     * @return The link
      */
     public String getLink() {
         return link;
     }
 
     /**
-     * 
-     * @param link
-     *     The link
+     * @param link The link
      */
     public void setLink(String link) {
         this.link = link;
@@ -39,18 +36,14 @@ public class Collection {
     }
 
     /**
-     * 
-     * @return
-     *     The owned
+     * @return The owned
      */
     public Owned getOwned() {
         return owned;
     }
 
     /**
-     * 
-     * @param owned
-     *     The owned
+     * @param owned The owned
      */
     public void setOwned(Owned owned) {
         this.owned = owned;

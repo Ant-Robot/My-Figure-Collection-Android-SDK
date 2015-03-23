@@ -1,14 +1,15 @@
-
 package com.ant_robot.mfc.api.pojo;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.util.Date;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Data {
@@ -26,18 +27,14 @@ public class Data {
     private String price;
 
     /**
-     * 
-     * @return
-     *     The id
+     * @return The id
      */
     public String getId() {
         return id;
     }
 
     /**
-     * 
-     * @param id
-     *     The id
+     * @param id The id
      */
     public void setId(String id) {
         this.id = id;
@@ -49,18 +46,14 @@ public class Data {
     }
 
     /**
-     * 
-     * @return
-     *     The barcode
+     * @return The barcode
      */
     public String getBarcode() {
         return barcode;
     }
 
     /**
-     * 
-     * @param barcode
-     *     The barcode
+     * @param barcode The barcode
      */
     public void setBarcode(String barcode) {
         this.barcode = barcode;
@@ -72,18 +65,14 @@ public class Data {
     }
 
     /**
-     * 
-     * @return
-     *     The name
+     * @return The name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @param name
-     *     The name
+     * @param name The name
      */
     public void setName(String name) {
         this.name = name;
@@ -95,18 +84,14 @@ public class Data {
     }
 
     /**
-     * 
-     * @return
-     *     The releaseDate
+     * @return The releaseDate
      */
     public Date getReleaseDate() {
         return releaseDate;
     }
 
     /**
-     * 
-     * @param releaseDate
-     *     The release_date
+     * @param releaseDate The release_date
      */
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
@@ -118,18 +103,14 @@ public class Data {
     }
 
     /**
-     * 
-     * @return
-     *     The price
+     * @return The price
      */
     public String getPrice() {
         return price;
     }
 
     /**
-     * 
-     * @param price
-     *     The price
+     * @param price The price
      */
     public void setPrice(String price) {
         this.price = price;

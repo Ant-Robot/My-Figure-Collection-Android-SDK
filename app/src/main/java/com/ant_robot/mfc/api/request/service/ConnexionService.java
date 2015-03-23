@@ -1,4 +1,4 @@
-package com.ant_robot.mfc.api.request;
+package com.ant_robot.mfc.api.request.service;
 
 import retrofit.Callback;
 import retrofit.client.Response;

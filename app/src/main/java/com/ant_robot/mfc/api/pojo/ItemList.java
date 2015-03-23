@@ -1,14 +1,15 @@
-
 package com.ant_robot.mfc.api.pojo;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import javax.annotation.Generated;
+
 @Generated("org.jsonschema2pojo")
-public class UserCollection {
+public class ItemList {
 
     @Expose
     private String name;
@@ -18,70 +19,58 @@ public class UserCollection {
     private Collection collection;
 
     /**
-     * 
-     * @return
-     *     The name
+     * @return The name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @param name
-     *     The name
+     * @param name The name
      */
     public void setName(String name) {
         this.name = name;
     }
 
-    public UserCollection withName(String name) {
+    public ItemList withName(String name) {
         this.name = name;
         return this;
     }
 
     /**
-     * 
-     * @return
-     *     The version
+     * @return The version
      */
     public String getVersion() {
         return version;
     }
 
     /**
-     * 
-     * @param version
-     *     The version
+     * @param version The version
      */
     public void setVersion(String version) {
         this.version = version;
     }
 
-    public UserCollection withVersion(String version) {
+    public ItemList withVersion(String version) {
         this.version = version;
         return this;
     }
 
     /**
-     * 
-     * @return
-     *     The collection
+     * @return The collection
      */
     public Collection getCollection() {
         return collection;
     }
 
     /**
-     * 
-     * @param collection
-     *     The collection
+     * @param collection The collection
      */
     public void setCollection(Collection collection) {
         this.collection = collection;
     }
 
-    public UserCollection withCollection(Collection collection) {
+    public ItemList withCollection(Collection collection) {
         this.collection = collection;
         return this;
     }
@@ -101,10 +90,10 @@ public class UserCollection {
         if (other == this) {
             return true;
         }
-        if ((other instanceof UserCollection) == false) {
+        if ((other instanceof ItemList) == false) {
             return false;
         }
-        UserCollection rhs = ((UserCollection) other);
+        ItemList rhs = ((ItemList) other);
         return new EqualsBuilder().append(name, rhs.name).append(version, rhs.version).append(collection, rhs.collection).isEquals();
     }
 

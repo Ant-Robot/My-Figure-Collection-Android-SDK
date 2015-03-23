@@ -1,14 +1,16 @@
-
 package com.ant_robot.mfc.api.pojo;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Owned {
@@ -25,18 +27,14 @@ public class Owned {
     private List<Item> item = new ArrayList<Item>();
 
     /**
-     * 
-     * @return
-     *     The link
+     * @return The link
      */
     public String getLink() {
         return link;
     }
 
     /**
-     * 
-     * @param link
-     *     The link
+     * @param link The link
      */
     public void setLink(String link) {
         this.link = link;
@@ -48,18 +46,14 @@ public class Owned {
     }
 
     /**
-     * 
-     * @return
-     *     The numItems
+     * @return The numItems
      */
     public String getNumItems() {
         return numItems;
     }
 
     /**
-     * 
-     * @param numItems
-     *     The num_items
+     * @param numItems The num_items
      */
     public void setNumItems(String numItems) {
         this.numItems = numItems;
@@ -71,18 +65,14 @@ public class Owned {
     }
 
     /**
-     * 
-     * @return
-     *     The numPages
+     * @return The numPages
      */
     public String getNumPages() {
         return numPages;
     }
 
     /**
-     * 
-     * @param numPages
-     *     The num_pages
+     * @param numPages The num_pages
      */
     public void setNumPages(String numPages) {
         this.numPages = numPages;
@@ -94,18 +84,14 @@ public class Owned {
     }
 
     /**
-     * 
-     * @return
-     *     The item
+     * @return The item
      */
     public List<Item> getItem() {
         return item;
     }
 
     /**
-     * 
-     * @param item
-     *     The item
+     * @param item The item
      */
     public void setItem(List<Item> item) {
         this.item = item;

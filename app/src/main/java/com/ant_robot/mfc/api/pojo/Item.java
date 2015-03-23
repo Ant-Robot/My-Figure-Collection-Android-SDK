@@ -1,11 +1,12 @@
-
 package com.ant_robot.mfc.api.pojo;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Item {
@@ -20,18 +21,14 @@ public class Item {
     private Mycollection mycollection;
 
     /**
-     * 
-     * @return
-     *     The root
+     * @return The root
      */
     public Root getRoot() {
         return root;
     }
 
     /**
-     * 
-     * @param root
-     *     The root
+     * @param root The root
      */
     public void setRoot(Root root) {
         this.root = root;
@@ -43,18 +40,14 @@ public class Item {
     }
 
     /**
-     * 
-     * @return
-     *     The category
+     * @return The category
      */
     public Category getCategory() {
         return category;
     }
 
     /**
-     * 
-     * @param category
-     *     The category
+     * @param category The category
      */
     public void setCategory(Category category) {
         this.category = category;
@@ -66,18 +59,14 @@ public class Item {
     }
 
     /**
-     * 
-     * @return
-     *     The data
+     * @return The data
      */
     public Data getData() {
         return data;
     }
 
     /**
-     * 
-     * @param data
-     *     The data
+     * @param data The data
      */
     public void setData(Data data) {
         this.data = data;
@@ -89,18 +78,14 @@ public class Item {
     }
 
     /**
-     * 
-     * @return
-     *     The mycollection
+     * @return The mycollection
      */
     public Mycollection getMycollection() {
         return mycollection;
     }
 
     /**
-     * 
-     * @param mycollection
-     *     The mycollection
+     * @param mycollection The mycollection
      */
     public void setMycollection(Mycollection mycollection) {
         this.mycollection = mycollection;

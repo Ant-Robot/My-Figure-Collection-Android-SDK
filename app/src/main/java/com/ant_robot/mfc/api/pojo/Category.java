@@ -1,11 +1,12 @@
-
 package com.ant_robot.mfc.api.pojo;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Category {
@@ -18,18 +19,14 @@ public class Category {
     private String color;
 
     /**
-     * 
-     * @return
-     *     The id
+     * @return The id
      */
     public String getId() {
         return id;
     }
 
     /**
-     * 
-     * @param id
-     *     The id
+     * @param id The id
      */
     public void setId(String id) {
         this.id = id;
@@ -41,18 +38,14 @@ public class Category {
     }
 
     /**
-     * 
-     * @return
-     *     The name
+     * @return The name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @param name
-     *     The name
+     * @param name The name
      */
     public void setName(String name) {
         this.name = name;
@@ -64,18 +57,14 @@ public class Category {
     }
 
     /**
-     * 
-     * @return
-     *     The color
+     * @return The color
      */
     public String getColor() {
         return color;
     }
 
     /**
-     * 
-     * @param color
-     *     The color
+     * @param color The color
      */
     public void setColor(String color) {
         this.color = color;

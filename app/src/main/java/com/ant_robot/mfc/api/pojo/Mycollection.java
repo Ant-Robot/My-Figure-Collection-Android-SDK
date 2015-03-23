@@ -1,11 +1,12 @@
-
 package com.ant_robot.mfc.api.pojo;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Mycollection {
@@ -18,18 +19,14 @@ public class Mycollection {
     private String wishability;
 
     /**
-     * 
-     * @return
-     *     The number
+     * @return The number
      */
     public String getNumber() {
         return number;
     }
 
     /**
-     * 
-     * @param number
-     *     The number
+     * @param number The number
      */
     public void setNumber(String number) {
         this.number = number;
@@ -41,18 +38,14 @@ public class Mycollection {
     }
 
     /**
-     * 
-     * @return
-     *     The score
+     * @return The score
      */
     public String getScore() {
         return score;
     }
 
     /**
-     * 
-     * @param score
-     *     The score
+     * @param score The score
      */
     public void setScore(String score) {
         this.score = score;
@@ -64,18 +57,14 @@ public class Mycollection {
     }
 
     /**
-     * 
-     * @return
-     *     The wishability
+     * @return The wishability
      */
     public String getWishability() {
         return wishability;
     }
 
     /**
-     * 
-     * @param wishability
-     *     The wishability
+     * @param wishability The wishability
      */
     public void setWishability(String wishability) {
         this.wishability = wishability;

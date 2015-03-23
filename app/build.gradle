@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'android-library'
 
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.ant_robot.mfcapi"
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
@@ -19,9 +18,9 @@ android {
     }
 }
 
+
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'org.mod4j.org.apache.commons:lang:2.1.0'
     compile 'javax.annotation:javax.annotation-api:1.2'
@@ -30,3 +29,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'io.reactivex:rxjava:1.0.8'
 }
+
+

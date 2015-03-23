@@ -8,6 +8,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.util.Date;
+
 @Generated("org.jsonschema2pojo")
 public class Data {
 
@@ -19,7 +21,7 @@ public class Data {
     private String name;
     @SerializedName("release_date")
     @Expose
-    private String releaseDate;
+    private Date releaseDate;
     @Expose
     private String price;
 
@@ -97,7 +99,7 @@ public class Data {
      * @return
      *     The releaseDate
      */
-    public String getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
@@ -106,11 +108,11 @@ public class Data {
      * @param releaseDate
      *     The release_date
      */
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
-    public Data withReleaseDate(String releaseDate) {
+    public Data withReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
         return this;
     }

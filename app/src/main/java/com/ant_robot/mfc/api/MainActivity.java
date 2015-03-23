@@ -13,11 +13,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.TextView;
 
 import com.ant_robot.mfc.api.pojo.UserCollection;
 import com.ant_robot.mfc.api.request.MFCRequest;
 import com.ant_robot.mfcapi.R;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Header;
+import retrofit.client.Response;
+import rx.Subscriber;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
@@ -102,19 +108,55 @@ public class MainActivity extends ActionBarActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            MFCRequest.INSTANCE.getCollectionService().getCollection("climbatize").observeOn(Schedulers.newThread())
-                    .subscribe(new Action1<UserCollection>() {
+        if (id == R.id.action_connection) {
 
-                        @Override
-                        public void call(UserCollection userCollection) {
-                            Log.d("test", userCollection.toString());
-                        }
-                    });
+            testConnection();
+            return true;
+        }else
+        if (id == R.id.action_collection) {
+
+            testCollection();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    void testConnection() {
+
+        MFCRequest.INSTANCE.getConnexionService("climbatize", "160184", getApplicationContext(), new Callback<Boolean>() {
+            @Override
+            public void success(Boolean aBoolean, Response response) {
+                if (aBoolean) {
+                    String success = "success";
+                    displayResult(success);
+                } else {
+                    displayResult("failure");
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                displayResult("failure");
+            }
+        });
+
+
+    }
+
+    private void displayResult(String result) {
+        ((TextView) this.findViewById(R.id.section_label)).setText(result);
+    }
+
+    void testCollection() {
+        MFCRequest.INSTANCE.getCollectionService().getCollection("climbatize").observeOn(Schedulers.newThread())
+                .subscribe(new Action1<UserCollection>() {
+
+                    @Override
+                    public void call(UserCollection userCollection) {
+                        displayResult(userCollection.toString());
+                    }
+                });
     }
 
     /**

@@ -243,12 +243,12 @@ public enum MFCRequest {
         connectAdapter.create(ManageItemService.class).alterItem(figureId, "commit", status.toInt(), number, price, where, method.toInt(), trackingNumber, boughtDate, shippingDate, substatus.toInt(), previousStatus.toInt(), 0, new Callback<AlterItem>() {
             @Override
             public void success(AlterItem alterItem, Response response) {
-                
+                callback.success(MANAGECOLLECTION.OK,response);
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                callback.failure(error);
             }
         });
     }

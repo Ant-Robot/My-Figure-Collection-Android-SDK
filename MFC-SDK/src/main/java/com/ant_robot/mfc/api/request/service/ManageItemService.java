@@ -42,16 +42,16 @@ public interface ManageItemService {
     @POST("/")
     void alterItem(@Query("iid") String itemId,
                    @Field("commit") String commit,
-                   @Field("status") String status,
+                   @Field("status") int status,
                    @Field("num") int num,
                    @Field("value") double value,
                    @Field("location") String location,
-                   @Field("method") String method,
+                   @Field("method") int method,
                    @Field("track") String track,
                    @Field("bdate") String bdate,
                    @Field("sdate") String sdate,
-                   @Field("sub_status") String sub_status,
-                   @Field("previous_status") String previous_status,
+                   @Field("sub_status") int sub_status,
+                   @Field("previous_status") int previous_status,
                    @Field("reload") int reload, Callback<AlterItem> callback);
 
     /**
@@ -79,16 +79,16 @@ public interface ManageItemService {
     @POST("/")
     AlterItem alterItemSync(@Query("iid") String itemId,
                             @Field("commit") String commit,
-                            @Field("status") String status,
+                            @Field("status") int status,
                             @Field("num") int num,
                             @Field("value") double value,
                             @Field("location") String location,
-                            @Field("method") String method,
+                            @Field("method") int method,
                             @Field("track") String track,
                             @Field("bdate") String bdate,
                             @Field("sdate") String sdate,
-                            @Field("sub_status") String sub_status,
-                            @Field("previous_status") String previous_status,
+                            @Field("sub_status") int sub_status,
+                            @Field("previous_status") int previous_status,
                             @Field("reload") int reload);
 
 
@@ -117,15 +117,15 @@ public interface ManageItemService {
     @POST("/")
     Observable<AlterItem> alterItem(@Query("iid") String itemId,
                                     @Field("commit") String commit,
-                                    @Field("status") String status,
+                                    @Field("status") int status,
                                     @Field("num") int num,
                                     @Field("value") double value,
                                     @Field("location") String location,
-                                    @Field("method") String method,
+                                    @Field("method") int method,
                                     @Field("track") String track,
                                     @Field("bdate") String bdate,
                                     @Field("sdate") String sdate,
-                                    @Field("sub_status") String sub_status,
-                                    @Field("previous_status") String previous_status,
+                                    @Field("sub_status") int sub_status,
+                                    @Field("previous_status") int previous_status,
                                     @Field("reload") int reload);
 }

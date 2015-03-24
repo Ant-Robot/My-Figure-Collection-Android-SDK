@@ -1,4 +1,4 @@
-package com.ant_robot.mfc.api.request;
+package com.ant_robot.mfc.api.request.json;
 
 import com.google.gson.GsonBuilder;
 
@@ -18,7 +18,7 @@ import retrofit.mime.TypedOutput;
 /**
 * Created by Climbatize on 23/03/2015.
 */
-class DynamicJsonConverter implements Converter {
+public class DynamicJsonConverter implements Converter {
 
     @Override
     public Object fromBody(TypedInput typedInput, Type type) throws ConversionException {

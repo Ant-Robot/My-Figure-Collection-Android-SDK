@@ -14,45 +14,6 @@ import rx.Observable;
  */
 public interface CollectionService {
 
-    public enum STATUS {
-        WISHED {
-            @Override
-            public String toString() {
-                return STATUS_WISHED;
-            }
-        }, ORDERED {
-            @Override
-            public String toString() {
-                return STATUS_ORDERED;
-            }
-        }, OWNED {
-            @Override
-            public String toString() {
-                return STATUS_OWNED;
-            }
-        }
-    }
-
-
-    public enum ROOT {
-        FIGURES {
-            @Override
-            public String toString() {
-                return ROOT_FIGURES;
-            }
-        }, GOODS {
-            @Override
-            public String toString() {
-                return ROOT_GOODS;
-            }
-        }, MEDIA {
-            @Override
-            public String toString() {
-                return ROOT_MEDIA;
-            }
-        }
-    }
-
 
     static final String STATUS_WISHED = "0";
     static final String STATUS_ORDERED = "1";

@@ -41,6 +41,15 @@ public interface CollectionService {
     @GET("/?mode=collection&type=json")
     ItemList getCollectionSync(@Query("username") String userName, @Query("page") int page);
 
+    @GET("/?mode=collection&type=json")
+    Observable<ItemList> getCollection(@Query("username") String userName, @Query("page") int page, @Query("status") int status, @Query("root") int root);
+
+    @GET("/?mode=collection&type=json")
+    void getCollection(@Query("username") String userName, @Query("page") int page, @Query("status") int status, @Query("root") int root, Callback<ItemList> callback);
+
+    @GET("/?mode=collection&type=json")
+    ItemList getCollectionSync(@Query("username") String userName, @Query("page") int page, @Query("status") int status, @Query("root") int root);
+
     @GET("/?mode=collection&type=json&status=" + STATUS_WISHED)
     Observable<ItemList> getWished(@Query("username") String userName);
 

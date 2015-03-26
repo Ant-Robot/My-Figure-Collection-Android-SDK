@@ -46,8 +46,7 @@ android {
 
 dependencies {
     compile 'com.google.code.gson:gson:2.3.1'
-    compile 'org.mod4j.org.apache.commons:lang:2.1.0'
-    compile 'javax.annotation:javax.annotation-api:1.2'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
     compile 'com.squareup.okhttp:okhttp:2.3.0'

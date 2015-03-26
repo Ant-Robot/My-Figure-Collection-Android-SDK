@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/MFC-SDK.iml" filepath="$PROJECT_DIR$/app/MFC-SDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/mfcapi.iml" filepath="$PROJECT_DIR$/mfcapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdktests/sdktests.iml" filepath="$PROJECT_DIR$/sdktests/sdktests.iml" />
     </modules>
   </component>
 </project>

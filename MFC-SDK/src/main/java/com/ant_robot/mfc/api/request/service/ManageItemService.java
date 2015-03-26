@@ -128,4 +128,75 @@ public interface ManageItemService {
                                     @Field("sub_status") int sub_status,
                                     @Field("previous_status") int previous_status,
                                     @Field("reload") int reload);
+
+    /**
+     * @param itemId          item id
+     * @param commit          set value "collect" for the collection
+     * @param status          new status in collection: 0
+     * @param wishability     how much you wish item on 5
+     * @param previous_status the current status in collection
+     * @param reload          unknown effect, prefer a 0 value
+     * @param callback        to manage request response
+     */
+    @FormUrlEncoded
+    @Headers({
+            "User-Agent: MFC Android app",
+            "Accept-Language: fr,fr-FR;q=0.8,en;q=0.6,en-US;q=0.4,es;q=0.2,ja;q=0.2",
+            "Connection: keep-alive"
+    }
+    )
+    @POST("/")
+    void wishItem(@Query("iid") String itemId,
+                   @Field("commit") String commit,
+                   @Field("status") int status,
+                   @Field("wishability") int wishability,
+                   @Field("previous_status") int previous_status,
+                   @Field("reload") int reload, Callback<AlterItem> callback);
+
+    /**
+     * @param itemId          item id
+     * @param commit          set value "collect" for the collection
+     * @param status          new status in collection (0,1,2)
+     * @param wishability     how much you wish item on 5
+     * @param previous_status the current status in collection
+     * @param reload          unknown effect, prefer a 0 value
+     */
+    @FormUrlEncoded
+    @Headers({
+            "User-Agent: MFC Android app",
+            "Accept-Language: fr,fr-FR;q=0.8,en;q=0.6,en-US;q=0.4,es;q=0.2,ja;q=0.2",
+            "Connection: keep-alive"
+    }
+    )
+    @POST("/")
+    AlterItem wishItemSync(@Query("iid") String itemId,
+                            @Field("commit") String commit,
+                            @Field("status") int status,
+                            @Field("wishability") int wishability,
+                            @Field("previous_status") int previous_status,
+                            @Field("reload") int reload);
+
+
+    /**
+     * @param itemId          item id
+     * @param commit          set value "collect" for the collection
+     * @param status          new status in collection (0,1,2)
+     * @param wishability     how much you wish item on 5
+     * @param previous_status the current status in collection
+     * @param reload          unknown effect, prefer a 0 value
+     */
+    @FormUrlEncoded
+    @Headers({
+            "User-Agent: MFC Android app",
+            "Accept-Language: fr,fr-FR;q=0.8,en;q=0.6,en-US;q=0.4,es;q=0.2,ja;q=0.2",
+            "Connection: keep-alive"
+    }
+    )
+    @POST("/")
+    Observable<AlterItem> wishItem(@Query("iid") String itemId,
+                                    @Field("commit") String commit,
+                                    @Field("status") int status,
+                                    @Field("wishability") int wishability,
+                                    @Field("previous_status") int previous_status,
+                                    @Field("reload") int reload);
 }

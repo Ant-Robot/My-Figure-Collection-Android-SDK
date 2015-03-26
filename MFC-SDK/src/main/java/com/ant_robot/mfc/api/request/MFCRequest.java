@@ -36,8 +36,10 @@ public enum MFCRequest {
     public static final String ITEM = "http://myfigurecollection.net/items.php";
     private final RestAdapter restAdapter;
     private final RestAdapter connectAdapter;
+    private final RestAdapter itemAdapter;
     private final OkHttpClient client;
     private List<HttpCookie> cookies;
+    private CookieManager cookieHandler;
 
     public enum MANAGECOLLECTION {
         NOTCONNECTED,
@@ -46,7 +48,7 @@ public enum MFCRequest {
     }
 
     public enum STATUS {
-        WISHED(0), ORDERED(1), OWNED(2);
+        WISHED(0), ORDERED(1), OWNED(2), DELETE(9);
 
         int method;
 
@@ -132,6 +134,12 @@ public enum MFCRequest {
                 .setEndpoint(LOGIN)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
+
+        itemAdapter = new RestAdapter.Builder()
+                .setClient(new OkClient(client))
+                .setEndpoint(ITEM)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
     }
 
     public RestAdapter getRestAdapter() {
@@ -172,9 +180,10 @@ public enum MFCRequest {
      * @param callback calls success true if connection succeed, calls success false if everything went ok but connexion failed, calls failure otherwise
      */
     public void connect(String username, String password, final Context context, final Callback<Boolean> callback) {
-        client.setCookieHandler(new CookieManager(
+        cookieHandler = new CookieManager(
                 new PersistentCookieStore(context),
-                CookiePolicy.ACCEPT_ALL));
+                CookiePolicy.ACCEPT_ALL);
+        client.setCookieHandler(cookieHandler);
 
         connectAdapter.create(ConnexionService.class).connectUser(username, password, 1, "signin", "http://myfigurecollection.net/", new Callback<Response>() {
             @Override
@@ -217,8 +226,6 @@ public enum MFCRequest {
     }
 
     public boolean checkCookies(Context context) {
-
-
         try {
             PersistentCookieStore persistentCookieStore = new PersistentCookieStore(context);
 
@@ -234,16 +241,54 @@ public enum MFCRequest {
         return cookies.size() > 0;
     }
 
-    public void setFigureStatusInCollection(String figureId, STATUS status, int number, double price, String where, SHIPPING method, String trackingNumber, String boughtDate, String shippingDate, SUBSTATUS substatus, STATUS previousStatus, final Callback<MANAGECOLLECTION> callback) {
+    public void setFigureStatusInCollection(String figureId, STATUS status, int number, double price, String where, SHIPPING method, String trackingNumber, String boughtDate, String shippingDate, SUBSTATUS substatus, STATUS previousStatus, Context context, final Callback<MANAGECOLLECTION> callback) {
         if (cookies == null || cookies.size() == 0) {
             callback.success(MANAGECOLLECTION.NOTCONNECTED, null);
             return;
         }
 
-        connectAdapter.create(ManageItemService.class).alterItem(figureId, "commit", status.toInt(), number, price, where, method.toInt(), trackingNumber, boughtDate, shippingDate, substatus.toInt(), previousStatus.toInt(), 0, new Callback<AlterItem>() {
+        if (cookieHandler == null) {
+            cookieHandler = new CookieManager(
+                    new PersistentCookieStore(context),
+                    CookiePolicy.ACCEPT_ALL);
+
+            client.setCookieHandler(cookieHandler);
+        }
+
+
+        itemAdapter.create(ManageItemService.class).alterItem(figureId, "commit", status.toInt(), number, price, where, method.toInt(), trackingNumber, boughtDate, shippingDate, substatus.toInt(), previousStatus.toInt(), 0, new Callback<AlterItem>() {
             @Override
             public void success(AlterItem alterItem, Response response) {
-                callback.success(MANAGECOLLECTION.OK,response);
+                callback.success(MANAGECOLLECTION.OK, response);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.failure(error);
+            }
+        });
+    }
+
+    public void wishFigure(String figureId,int wishability, STATUS previousStatus, Context context, final Callback<MANAGECOLLECTION> callback)
+    {
+        if (cookies == null || cookies.size() == 0) {
+            callback.success(MANAGECOLLECTION.NOTCONNECTED, null);
+            return;
+        }
+
+        if (cookieHandler == null) {
+            cookieHandler = new CookieManager(
+                    new PersistentCookieStore(context),
+                    CookiePolicy.ACCEPT_ALL);
+
+            client.setCookieHandler(cookieHandler);
+        }
+
+
+        itemAdapter.create(ManageItemService.class).wishItem(figureId, "collect", MFCRequest.STATUS.WISHED.toInt(), wishability, previousStatus.toInt(), 0, new Callback<AlterItem>() {
+            @Override
+            public void success(AlterItem alterItem, Response response) {
+                callback.success(MANAGECOLLECTION.OK, response);
             }
 
             @Override

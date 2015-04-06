@@ -1,6 +1,6 @@
 # My-Figure-Collection-Android-SDK
 
-This library aims to helps developers to integrate MFC API functions directly into their Android project.
+This library aims to help developers to integrate MFC API functions directly into their Android project.
 
 To integrate it to your project, simply add this repos to your build.gradle :
 

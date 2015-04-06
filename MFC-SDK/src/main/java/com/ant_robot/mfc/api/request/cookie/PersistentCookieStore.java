@@ -17,6 +17,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.common.base.CharMatcher;
+
 
 public class PersistentCookieStore implements CookieStore {
     private static final String TAG = PersistentCookieStore.class
@@ -134,7 +136,7 @@ public class PersistentCookieStore implements CookieStore {
 		for (Iterator<URI> it = allCookies.keySet().iterator(); it.hasNext();) {
 			URI storedUri = it.next();
 			// Check if the two domains are the same
-			if (storedUri.getHost().equals(uri.getHost())) {
+			if (storedUri.getHost().contains(uri.getHost())) {
 				// Check if the stored path is null or "/"
 				// OR
 				// if the two the paths are the same

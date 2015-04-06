@@ -1,6 +1,6 @@
 package com.ant_robot.mfc.api.request.service;
 
-import com.ant_robot.mfc.api.pojo.ItemList;
+import com.ant_robot.mfc.api.pojo.SearchResult;
 
 import retrofit.Callback;
 import retrofit.http.GET;
@@ -12,11 +12,11 @@ import rx.Observable;
  */
 public interface SearchService {
     @GET("/?mode=search&type=json")
-    Observable<ItemList> search(@Query("keywords") String keywords);
+    Observable<SearchResult> search(@Query("keywords") String keywords);
 
     @GET("/?mode=search&type=json")
-    void search(@Query("keywords") String keywords, Callback<ItemList> callback);
+    void search(@Query("keywords") String keywords, Callback<SearchResult> callback);
 
     @GET("/?mode=search&type=json")
-    ItemList searchSync(@Query("keywords") String keywords);
+    SearchResult searchSync(@Query("keywords") String keywords);
 }

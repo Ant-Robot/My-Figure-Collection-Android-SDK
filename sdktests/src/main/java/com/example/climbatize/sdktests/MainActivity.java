@@ -16,7 +16,12 @@ import android.widget.TextView;
 import com.ant_robot.mfc.api.pojo.Collection;
 import com.ant_robot.mfc.api.pojo.ItemList;
 import com.ant_robot.mfc.api.pojo.PictureGallery;
+import com.ant_robot.mfc.api.pojo.SearchResult;
+import com.ant_robot.mfc.api.pojo.UserProfile;
 import com.ant_robot.mfc.api.request.MFCRequest;
+import com.ant_robot.mfc.api.request.service.ItemDate;
+
+import java.util.Date;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -78,6 +83,9 @@ public class MainActivity extends ActionBarActivity {
             final Button button3 = (Button) rootView.findViewById(R.id.button3);
             final Button button4 = (Button) rootView.findViewById(R.id.button4);
             final Button button5 = (Button) rootView.findViewById(R.id.button5);
+            final Button button6 = (Button) rootView.findViewById(R.id.button6);
+            final Button button7 = (Button) rootView.findViewById(R.id.button7);
+            final Button button8 = (Button) rootView.findViewById(R.id.button8);
 
             button0.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,7 +107,7 @@ public class MainActivity extends ActionBarActivity {
             button1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MFCRequest.INSTANCE.connect("climbatize", "160184", PlaceholderFragment.this.getActivity(), new Callback<Boolean>() {
+                    MFCRequest.INSTANCE.connect("climbatize", null, PlaceholderFragment.this.getActivity(), new Callback<Boolean>() {
                         @Override
                         public void success(Boolean aBoolean, Response response) {
                             textView.setText(aBoolean ? "connexion OK" : "connexion KO");
@@ -137,6 +145,94 @@ public class MainActivity extends ActionBarActivity {
                         @Override
                         public void success(MFCRequest.MANAGECOLLECTION managecollection, Response response) {
                             textView.setText(managecollection.toString());
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            textView.setText(error.getLocalizedMessage());
+                        }
+                    });
+                }
+            });
+
+            button4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MFCRequest.INSTANCE.orderFigure("166816",1,10,"test", MFCRequest.SHIPPING.SAL,"test",new ItemDate(new Date()),null, MFCRequest.SUBSTATUS.NA, MFCRequest.STATUS.WISHED,getActivity().getApplicationContext(),new Callback<MFCRequest.MANAGECOLLECTION>() {
+                        @Override
+                        public void success(MFCRequest.MANAGECOLLECTION managecollection, Response response) {
+                            textView.setText(managecollection.toString());
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            textView.setText(error.getLocalizedMessage());
+                        }
+                    });
+
+                }
+            });
+
+            button5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MFCRequest.INSTANCE.ownFigure("166816", 1, new ItemDate(new Date()),8,10, "test", MFCRequest.SHIPPING.SAL, "test", new ItemDate(new Date()), null, MFCRequest.SUBSTATUS.NA, MFCRequest.STATUS.WISHED, getActivity().getApplicationContext(), new Callback<MFCRequest.MANAGECOLLECTION>() {
+                        @Override
+                        public void success(MFCRequest.MANAGECOLLECTION managecollection, Response response) {
+                            textView.setText(managecollection.toString());
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            textView.setText(error.getLocalizedMessage());
+                        }
+                    });
+
+                }
+            });
+
+            button6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MFCRequest.INSTANCE.deleteFigure("166816", MFCRequest.STATUS.WISHED, getActivity().getApplicationContext(), new Callback<MFCRequest.MANAGECOLLECTION>() {
+                        @Override
+                        public void success(MFCRequest.MANAGECOLLECTION managecollection, Response response) {
+                            textView.setText(managecollection.toString());
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            textView.setText(error.getLocalizedMessage());
+                        }
+                    });
+
+                }
+            });
+
+            button7.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MFCRequest.INSTANCE.getSearchService().search("test", new Callback<SearchResult>() {
+                        @Override
+                        public void success(SearchResult itemList, Response response) {
+                            textView.setText(itemList.toString());
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            textView.setText(error.getLocalizedMessage());
+                        }
+                    });
+                }
+            });
+
+            button8.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MFCRequest.INSTANCE.getUserService().getUser("climbatize", new Callback<UserProfile>() {
+                        @Override
+                        public void success(UserProfile itemList, Response response) {
+                            textView.setText(itemList.toString());
                         }
 
                         @Override

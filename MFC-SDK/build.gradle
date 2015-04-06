@@ -51,6 +51,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'io.reactivex:rxjava:1.0.8'
+    compile 'com.google.guava:guava:18.0'
 }
 
 

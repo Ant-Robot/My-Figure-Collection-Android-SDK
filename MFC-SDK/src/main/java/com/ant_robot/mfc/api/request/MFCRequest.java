@@ -8,7 +8,9 @@ import com.ant_robot.mfc.api.request.json.DynamicJsonConverter;
 import com.ant_robot.mfc.api.request.service.CollectionService;
 import com.ant_robot.mfc.api.request.service.ConnexionService;
 import com.ant_robot.mfc.api.request.service.GalleryService;
+import com.ant_robot.mfc.api.request.service.ItemDate;
 import com.ant_robot.mfc.api.request.service.ManageItemService;
+import com.ant_robot.mfc.api.request.service.PostEndPoint;
 import com.ant_robot.mfc.api.request.service.SearchService;
 import com.ant_robot.mfc.api.request.service.UserService;
 import com.squareup.okhttp.OkHttpClient;
@@ -36,10 +38,9 @@ public enum MFCRequest {
     public static final String ITEM = "http://myfigurecollection.net/items.php";
     private final RestAdapter restAdapter;
     private final RestAdapter connectAdapter;
-    private final RestAdapter itemAdapter;
     private final OkHttpClient client;
     private List<HttpCookie> cookies;
-    private CookieManager cookieHandler;
+    private final PostEndPoint poe;
 
     public enum MANAGECOLLECTION {
         NOTCONNECTED,
@@ -121,6 +122,8 @@ public enum MFCRequest {
         client.setReadTimeout(60, TimeUnit.SECONDS);
         client.setFollowRedirects(false);
 
+        poe = new PostEndPoint(PostEndPoint.MODE.LOGIN);
+
 
         restAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(client))
@@ -131,15 +134,10 @@ public enum MFCRequest {
 
         connectAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(client))
-                .setEndpoint(LOGIN)
+                .setEndpoint(poe)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
 
-        itemAdapter = new RestAdapter.Builder()
-                .setClient(new OkClient(client))
-                .setEndpoint(ITEM)
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .build();
     }
 
     public RestAdapter getRestAdapter() {
@@ -180,10 +178,9 @@ public enum MFCRequest {
      * @param callback calls success true if connection succeed, calls success false if everything went ok but connexion failed, calls failure otherwise
      */
     public void connect(String username, String password, final Context context, final Callback<Boolean> callback) {
-        cookieHandler = new CookieManager(
+        client.setCookieHandler(new CookieManager(
                 new PersistentCookieStore(context),
-                CookiePolicy.ACCEPT_ALL);
-        client.setCookieHandler(cookieHandler);
+                CookiePolicy.ACCEPT_ALL));
 
         connectAdapter.create(ConnexionService.class).connectUser(username, password, 1, "signin", "http://myfigurecollection.net/", new Callback<Response>() {
             @Override
@@ -225,15 +222,22 @@ public enum MFCRequest {
         });
     }
 
+    /**
+     * removes all connection cookies from the permanent cookie store
+     *
+     * @param context  an application context for the cookie store
+     * @param callback calls success true if removal succeed, calls success false if something went wrong
+     */
+    public void disconnect(final Context context, final Callback<Boolean> callback) {
+        PersistentCookieStore persistentCookieStore = new PersistentCookieStore(context);
+        callback.success(persistentCookieStore.removeAll(),null);
+    }
+
     public boolean checkCookies(Context context) {
         try {
             PersistentCookieStore persistentCookieStore = new PersistentCookieStore(context);
 
-            client.setCookieHandler(new CookieManager(
-                    persistentCookieStore,
-                    CookiePolicy.ACCEPT_ALL));
-
-            cookies = persistentCookieStore.get(new URI("https://.myfigurecollection.net/"));
+            cookies = persistentCookieStore.get(new URI("https://myfigurecollection.net/"));
         } catch (URISyntaxException e) {
             cookies = new ArrayList<>();
         }
@@ -241,60 +245,90 @@ public enum MFCRequest {
         return cookies.size() > 0;
     }
 
-    public void setFigureStatusInCollection(String figureId, STATUS status, int number, double price, String where, SHIPPING method, String trackingNumber, String boughtDate, String shippingDate, SUBSTATUS substatus, STATUS previousStatus, Context context, final Callback<MANAGECOLLECTION> callback) {
-        if (cookies == null || cookies.size() == 0) {
+    public void orderFigure(String figureId, int number, double price, String where, SHIPPING method, String trackingNumber, ItemDate boughtDate, ItemDate shippingDate, SUBSTATUS substatus, STATUS previousStatus, Context context, final Callback<MANAGECOLLECTION> callback) {
+        if (checkCookies(context)) {
+
+
+            poe.setMode(PostEndPoint.MODE.ITEM);
+            connectAdapter.create(ManageItemService.class).orderItem(figureId, "collect", STATUS.ORDERED.toInt(), number, price, where, method.toInt(), trackingNumber, boughtDate, shippingDate, substatus.toInt(), previousStatus.toInt(), 0, new Callback<AlterItem>() {
+                @Override
+                public void success(AlterItem alterItem, Response response) {
+                    callback.success(MANAGECOLLECTION.OK, response);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    callback.failure(error);
+                }
+            });
+
+        } else {
             callback.success(MANAGECOLLECTION.NOTCONNECTED, null);
-            return;
         }
-
-        if (cookieHandler == null) {
-            cookieHandler = new CookieManager(
-                    new PersistentCookieStore(context),
-                    CookiePolicy.ACCEPT_ALL);
-
-            client.setCookieHandler(cookieHandler);
-        }
-
-
-        itemAdapter.create(ManageItemService.class).alterItem(figureId, "commit", status.toInt(), number, price, where, method.toInt(), trackingNumber, boughtDate, shippingDate, substatus.toInt(), previousStatus.toInt(), 0, new Callback<AlterItem>() {
-            @Override
-            public void success(AlterItem alterItem, Response response) {
-                callback.success(MANAGECOLLECTION.OK, response);
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                callback.failure(error);
-            }
-        });
     }
 
-    public void wishFigure(String figureId,int wishability, STATUS previousStatus, Context context, final Callback<MANAGECOLLECTION> callback)
-    {
-        if (cookies == null || cookies.size() == 0) {
+    public void ownFigure(String figureId, int number, ItemDate odate, int score, double price, String where, SHIPPING method, String trackingNumber, ItemDate boughtDate, ItemDate shippingDate, SUBSTATUS substatus, STATUS previousStatus, Context context, final Callback<MANAGECOLLECTION> callback) {
+        if (checkCookies(context)) {
+
+
+            poe.setMode(PostEndPoint.MODE.ITEM);
+            connectAdapter.create(ManageItemService.class).ownItem(figureId, "collect", STATUS.OWNED.toInt(), number, score, odate, price, where, method.toInt(), trackingNumber, boughtDate, shippingDate, substatus.toInt(), previousStatus.toInt(), 0, new Callback<AlterItem>() {
+                @Override
+                public void success(AlterItem alterItem, Response response) {
+                    callback.success(MANAGECOLLECTION.OK, response);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    callback.failure(error);
+                }
+            });
+        } else {
             callback.success(MANAGECOLLECTION.NOTCONNECTED, null);
-            return;
         }
-
-        if (cookieHandler == null) {
-            cookieHandler = new CookieManager(
-                    new PersistentCookieStore(context),
-                    CookiePolicy.ACCEPT_ALL);
-
-            client.setCookieHandler(cookieHandler);
-        }
-
-
-        itemAdapter.create(ManageItemService.class).wishItem(figureId, "collect", MFCRequest.STATUS.WISHED.toInt(), wishability, previousStatus.toInt(), 0, new Callback<AlterItem>() {
-            @Override
-            public void success(AlterItem alterItem, Response response) {
-                callback.success(MANAGECOLLECTION.OK, response);
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                callback.failure(error);
-            }
-        });
     }
+
+    public void wishFigure(String figureId, int wishability, STATUS previousStatus, Context context, final Callback<MANAGECOLLECTION> callback) {
+        if (checkCookies(context)) {
+
+
+            poe.setMode(PostEndPoint.MODE.ITEM);
+            connectAdapter.create(ManageItemService.class).wishItem(figureId, "collect", STATUS.WISHED.toInt(), wishability, previousStatus.toInt(), 0, new Callback<AlterItem>() {
+                @Override
+                public void success(AlterItem alterItem, Response response) {
+                    callback.success(MANAGECOLLECTION.OK, response);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    callback.failure(error);
+                }
+            });
+        } else {
+            callback.success(MANAGECOLLECTION.NOTCONNECTED, null);
+        }
+    }
+
+    public void deleteFigure(String figureId, STATUS previousStatus, Context context, final Callback<MANAGECOLLECTION> callback) {
+        if (checkCookies(context)) {
+
+
+            poe.setMode(PostEndPoint.MODE.ITEM);
+            connectAdapter.create(ManageItemService.class).deleteItem(figureId, "collect", STATUS.DELETE.toInt(), previousStatus.toInt(), 0, new Callback<AlterItem>() {
+                @Override
+                public void success(AlterItem alterItem, Response response) {
+                    callback.success(MANAGECOLLECTION.OK, response);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    callback.failure(error);
+                }
+            });
+        } else {
+            callback.success(MANAGECOLLECTION.NOTCONNECTED, null);
+        }
+    }
+
+
 }

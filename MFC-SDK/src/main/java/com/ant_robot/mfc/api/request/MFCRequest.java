@@ -242,7 +242,14 @@ public enum MFCRequest {
             cookies = new ArrayList<>();
         }
 
-        return cookies.size() > 0;
+        for (HttpCookie cookie:cookies)
+        {
+            if (cookie.getName().equalsIgnoreCase("tb_session_id"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void orderFigure(String figureId, int number, double price, String where, SHIPPING method, String trackingNumber, ItemDate boughtDate, ItemDate shippingDate, SUBSTATUS substatus, STATUS previousStatus, Context context, final Callback<MANAGECOLLECTION> callback) {

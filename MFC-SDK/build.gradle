@@ -9,12 +9,12 @@ task sourceJar(type: Jar) {
 
 publishing {
     publications {
-        bar(MavenPublication) {
+        MFCSDK(MavenPublication) {
             groupId 'com.ant_robot'
             artifactId 'mfc.api'
             version '0.0.4'
             artifact(sourceJar)
-            artifact("$buildDir/outputs/aar/bar-release.aar")
+            artifact("$buildDir/outputs/aar/MFC-SDK-release.aar")
         }
     }
     repositories {

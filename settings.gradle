@@ -1,1 +1,1 @@
-include ':MFC-SDK', ':sdktests'
+include ':MFC-SDK'

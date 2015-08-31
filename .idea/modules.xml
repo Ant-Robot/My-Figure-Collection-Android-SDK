@@ -3,8 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MFC-SDK/MFC-SDK.iml" filepath="$PROJECT_DIR$/MFC-SDK/MFC-SDK.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mfcapi.iml" filepath="$PROJECT_DIR$/mfcapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/My-Figure-Collection-Android-SDK.iml" filepath="$PROJECT_DIR$/My-Figure-Collection-Android-SDK.iml" />
     </modules>
   </component>
 </project>
-

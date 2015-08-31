@@ -1,5 +1,8 @@
 package com.ant_robot.mfc.api.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,7 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Owned {
+public class ItemState implements Parcelable {
 
     @Expose
     private String link;
@@ -37,7 +40,7 @@ public class Owned {
         this.link = link;
     }
 
-    public Owned withLink(String link) {
+    public ItemState withLink(String link) {
         this.link = link;
         return this;
     }
@@ -56,7 +59,7 @@ public class Owned {
         this.numItems = numItems;
     }
 
-    public Owned withNumItems(String numItems) {
+    public ItemState withNumItems(String numItems) {
         this.numItems = numItems;
         return this;
     }
@@ -75,7 +78,7 @@ public class Owned {
         this.numPages = numPages;
     }
 
-    public Owned withNumPages(String numPages) {
+    public ItemState withNumPages(String numPages) {
         this.numPages = numPages;
         return this;
     }
@@ -94,7 +97,7 @@ public class Owned {
         this.item = item;
     }
 
-    public Owned withItem(List<Item> item) {
+    public ItemState withItem(List<Item> item) {
         this.item = item;
         return this;
     }
@@ -114,11 +117,46 @@ public class Owned {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Owned) == false) {
+        if ((other instanceof ItemState) == false) {
             return false;
         }
-        Owned rhs = ((Owned) other);
+        ItemState rhs = ((ItemState) other);
         return new EqualsBuilder().append(link, rhs.link).append(numItems, rhs.numItems).append(numPages, rhs.numPages).append(item, rhs.item).isEquals();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(link);
+        dest.writeString(numItems);
+        dest.writeString(numPages);
+        dest.writeList(item);
+    }
+
+    /**
+     * Static field used to regenerate object, individually or as arrays
+     */
+    public static final Creator<ItemState> CREATOR = new Creator<ItemState>() {
+        public ItemState createFromParcel(Parcel pc) {
+            return new ItemState(pc);
+        }
+
+        public ItemState[] newArray(int size) {
+            return new ItemState[size];
+        }
+    };
+
+    /**
+     * Ctor from Parcel, reads back fields IN THE ORDER they were written
+     */
+    public ItemState(Parcel pc) {
+        link = pc.readString();
+        numItems = pc.readString();
+        numPages = pc.readString();
+        item = pc.readArrayList(Item.class.getClassLoader());
+    }
 }

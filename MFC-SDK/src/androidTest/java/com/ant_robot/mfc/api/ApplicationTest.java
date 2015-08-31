@@ -1,4 +1,4 @@
-package com.ant_robot.mfcapi;
+package com.ant_robot.mfc.api;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

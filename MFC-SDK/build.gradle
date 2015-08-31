@@ -24,11 +24,7 @@ ext {
     allLicenses = ["Apache-2.0"]
 }
 
-//./gradlew clean build publish
-task sourceJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier "source"
-}
+
 
 android {
     compileSdkVersion 23
@@ -64,6 +60,7 @@ dependencies {
     compile 'com.google.guava:guava:18.0'
 }
 
-
+apply from: '../install.gradle'
+apply from: '../bintray.gradle'
 
 

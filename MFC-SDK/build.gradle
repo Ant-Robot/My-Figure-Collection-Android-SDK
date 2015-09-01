@@ -13,7 +13,7 @@ ext {
     siteUrl = 'http://myfigurecollection.net'
     gitUrl = 'https://github.com/Ant-Robot/My-Figure-Collection-Android-SDK.git'
 
-    libraryVersion = '0.0.4.1'
+    libraryVersion = '0.0.4.2'
 
     developerId = 'climbatize'
     developerName = 'Climbatize'

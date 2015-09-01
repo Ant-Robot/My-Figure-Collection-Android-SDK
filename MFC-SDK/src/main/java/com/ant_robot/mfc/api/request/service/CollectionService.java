@@ -68,22 +68,22 @@ public interface CollectionService {
     @GET("/?mode=collection&type=json&status=" + STATUS_WISHED)
     ItemList getWishedSync(@Query("username") String userName, @Query("page") int page);
 
-    @GET("/?mode=collection&type=json&status" + STATUS_ORDERED)
+    @GET("/?mode=collection&type=json&status=" + STATUS_ORDERED)
     Observable<ItemList> getOrdered(@Query("username") String userName);
 
-    @GET("/?mode=collection&type=json&status" + STATUS_ORDERED)
+    @GET("/?mode=collection&type=json&status=" + STATUS_ORDERED)
     void getOrdered(@Query("username") String userName, Callback<ItemList> callback);
 
-    @GET("/?mode=collection&type=json&status" + STATUS_ORDERED)
+    @GET("/?mode=collection&type=json&status=" + STATUS_ORDERED)
     ItemList getOrderedSync(@Query("username") String userName);
 
-    @GET("/?mode=collection&type=json&status" + STATUS_ORDERED)
+    @GET("/?mode=collection&type=json&statu=s" + STATUS_ORDERED)
     Observable<ItemList> getOrdered(@Query("username") String userName, @Query("page") int page);
 
-    @GET("/?mode=collection&type=json&status" + STATUS_ORDERED)
+    @GET("/?mode=collection&type=json&status=" + STATUS_ORDERED)
     void getOrdered(@Query("username") String userName, @Query("page") int page, Callback<ItemList> callback);
 
-    @GET("/?mode=collection&type=json&status" + STATUS_ORDERED)
+    @GET("/?mode=collection&type=json&status=" + STATUS_ORDERED)
     ItemList getOrderedSync(@Query("username") String userName, @Query("page") int page);
 
     @GET("/?mode=collection&type=json&status=" + STATUS_OWNED)

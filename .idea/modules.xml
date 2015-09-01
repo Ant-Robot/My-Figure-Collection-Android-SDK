@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/MFC-SDK.iml" filepath="$PROJECT_DIR$/app/MFC-SDK.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mfcapi.iml" filepath="$PROJECT_DIR$/mfcapi.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sdktests/sdktests.iml" filepath="$PROJECT_DIR$/sdktests/sdktests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MFC-SDK/MFC-SDK.iml" filepath="$PROJECT_DIR$/MFC-SDK/MFC-SDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/My-Figure-Collection-Android-SDK.iml" filepath="$PROJECT_DIR$/My-Figure-Collection-Android-SDK.iml" />
     </modules>
   </component>
 </project>
-

@@ -6,20 +6,11 @@ To integrate it to your project, simply add this repos to your build.gradle :
 
 ```gradle
 repositories {
-    maven { url 'https://github.com/Ant-Robot/My-Figure-Collection-Android-SDK/raw/maven/'}
+    maven { url 'https://dl.bintray.com/climbatize/maven/'}
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'org.apache.commons:commons-lang3:3.3.2'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
-    compile 'com.squareup.okhttp:okhttp:2.3.0'
-    compile 'io.reactivex:rxjava:1.0.8'
-    compile 'com.google.guava:guava:18.0'
-    compile 'com.ant_robot:mfc.api:0.0.4'
+    compile 'com.ant_robot:MFC-SDK:0.0.4.2'
 }
 ```
 

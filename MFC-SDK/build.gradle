@@ -60,7 +60,7 @@ dependencies {
     compile 'com.google.guava:guava:18.0'
 }
 
-apply from: '../install.gradle'
-apply from: '../bintray.gradle'
+//apply from: '../install.gradle'
+//apply from: '../bintray.gradle'
 
 

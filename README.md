@@ -1,6 +1,8 @@
 # My-Figure-Collection-Android-SDK
 
-[ ![Download](https://api.bintray.com/packages/climbatize/maven/MFC-SDK/images/download.svg) ](https://bintray.com/climbatize/maven/MFC-SDK/_latestVersion)
+Maven : [ ![Download](https://api.bintray.com/packages/climbatize/maven/MFC-SDK/images/download.svg) ](https://bintray.com/climbatize/maven/MFC-SDK/_latestVersion)
+Develop : [![Build Status](https://travis-ci.org/Ant-Robot/My-Figure-Collection-Android-SDK.svg?branch=develop)](https://travis-ci.org/Ant-Robot/My-Figure-Collection-Android-SDK)
+Master : [![Build Status](https://travis-ci.org/Ant-Robot/My-Figure-Collection-Android-SDK.svg?branch=master)](https://travis-ci.org/Ant-Robot/My-Figure-Collection-Android-SDK)
 
 This library aims to help developers to integrate MFC API functions directly into their Android project.
 

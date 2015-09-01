@@ -1,5 +1,7 @@
 # My-Figure-Collection-Android-SDK
 
+[ ![Download](https://api.bintray.com/packages/climbatize/maven/MFC-SDK/images/download.svg) ](https://bintray.com/climbatize/maven/MFC-SDK/_latestVersion)
+
 This library aims to help developers to integrate MFC API functions directly into their Android project.
 
 To integrate it to your project, simply add this repos to your build.gradle :

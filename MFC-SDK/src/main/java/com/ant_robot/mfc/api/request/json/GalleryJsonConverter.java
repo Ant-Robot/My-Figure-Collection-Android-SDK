@@ -6,6 +6,6 @@ package com.ant_robot.mfc.api.request.json;
 public class GalleryJsonConverter extends DynamicJsonConverter{
     @Override
     protected String getDateFormat() {
-        return "EEE , dd MMM yyyy HH:mm:ss Z";
+        return "EEE, dd MMM yyyy HH:mm:ss Z";
     }
 }

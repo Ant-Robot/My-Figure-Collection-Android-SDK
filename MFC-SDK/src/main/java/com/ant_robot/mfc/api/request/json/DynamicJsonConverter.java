@@ -34,12 +34,16 @@ public class DynamicJsonConverter implements Converter {
                 return string;
             } else {
                 return new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd")
+                        .setDateFormat(getDateFormat())
                         .create().fromJson(string, type); // convert to the supplied type, typically Object, JsonObject or Map<String, Object>
             }
         } catch (Exception e) { // a lot may happen here, whatever happens
             throw new ConversionException(e); // wrap it into ConversionException so retrofit can process it
         }
+    }
+
+    protected String getDateFormat() {
+        return "yyyy-MM-dd";
     }
 
     @Override

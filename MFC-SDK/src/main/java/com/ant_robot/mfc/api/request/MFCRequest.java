@@ -5,6 +5,7 @@ import android.content.Context;
 import com.ant_robot.mfc.api.pojo.AlterItem;
 import com.ant_robot.mfc.api.request.cookie.PersistentCookieStore;
 import com.ant_robot.mfc.api.request.json.DynamicJsonConverter;
+import com.ant_robot.mfc.api.request.json.GalleryJsonConverter;
 import com.ant_robot.mfc.api.request.service.CollectionService;
 import com.ant_robot.mfc.api.request.service.ConnexionService;
 import com.ant_robot.mfc.api.request.service.GalleryService;
@@ -38,7 +39,11 @@ public enum MFCRequest {
     public static final String ITEM = "http://myfigurecollection.net/items.php";
     private final RestAdapter restAdapter;
     private final RestAdapter connectAdapter;
+    private final RestAdapter galleryAdapter;
+
     private final OkHttpClient client;
+    private final DynamicJsonConverter standartConverter;
+    private final GalleryJsonConverter galleryConverter;
     private List<HttpCookie> cookies;
     private final PostEndPoint poe;
 
@@ -125,9 +130,19 @@ public enum MFCRequest {
         poe = new PostEndPoint(PostEndPoint.MODE.LOGIN);
 
 
+        standartConverter = new DynamicJsonConverter();
+        galleryConverter = new GalleryJsonConverter();
+
         restAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(client))
-                .setConverter(new DynamicJsonConverter())
+                .setConverter(standartConverter)
+                .setEndpoint(ROOT_URL)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        galleryAdapter = new RestAdapter.Builder()
+                .setClient(new OkClient(client))
+                .setConverter(galleryConverter)
                 .setEndpoint(ROOT_URL)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
@@ -158,7 +173,7 @@ public enum MFCRequest {
     }
 
     public GalleryService getGalleryService() {
-        return restAdapter.create(GalleryService.class);
+        return galleryAdapter.create(GalleryService.class);
     }
 
     public SearchService getSearchService() {
@@ -230,7 +245,7 @@ public enum MFCRequest {
      */
     public void disconnect(final Context context, final Callback<Boolean> callback) {
         PersistentCookieStore persistentCookieStore = new PersistentCookieStore(context);
-        callback.success(persistentCookieStore.removeAll(),null);
+        callback.success(persistentCookieStore.removeAll(), null);
     }
 
     public boolean checkCookies(Context context) {
@@ -242,10 +257,8 @@ public enum MFCRequest {
             cookies = new ArrayList<>();
         }
 
-        for (HttpCookie cookie:cookies)
-        {
-            if (cookie.getName().equalsIgnoreCase("tb_session_id"))
-            {
+        for (HttpCookie cookie : cookies) {
+            if (cookie.getName().equalsIgnoreCase("tb_session_id")) {
                 return true;
             }
         }

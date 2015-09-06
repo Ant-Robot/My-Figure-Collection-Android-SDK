@@ -15,4 +15,4 @@ android:
   licenses:
     - android-sdk-license-5be876d5 # new license!
 
-script: ./gradlew build -p MFC-SDK
+script: ./gradle build -p MFC-SDK

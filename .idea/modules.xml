@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MFC-SDK/MFC-SDK.iml" filepath="$PROJECT_DIR$/MFC-SDK/MFC-SDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/My-Figure-Collection-Android-SDK.iml" filepath="$PROJECT_DIR$/My-Figure-Collection-Android-SDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testmfc/testmfc.iml" filepath="$PROJECT_DIR$/testmfc/testmfc.iml" />
     </modules>
   </component>
 </project>

@@ -1,6 +1,10 @@
 package com.ant_robot.mfc.api.request.json;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -9,6 +13,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
 
 import retrofit.converter.ConversionException;
 import retrofit.converter.Converter;
@@ -19,6 +28,12 @@ import retrofit.mime.TypedOutput;
 * Created by Climbatize on 23/03/2015.
 */
 public class DynamicJsonConverter implements Converter {
+    private static final String[] DATE_FORMATS = new String[] {
+            "yyyy-MM-dd",
+            "yyyy-MM-00",
+            "EEE, dd MMM yyyy HH:mm:ss Z"
+    };
+
 
     @Override
     public Object fromBody(TypedInput typedInput, Type type) throws ConversionException {
@@ -34,16 +49,12 @@ public class DynamicJsonConverter implements Converter {
                 return string;
             } else {
                 return new GsonBuilder()
-                        .setDateFormat(getDateFormat())
+                        .registerTypeAdapter(Date.class, new DateDeserializer())
                         .create().fromJson(string, type); // convert to the supplied type, typically Object, JsonObject or Map<String, Object>
             }
         } catch (Exception e) { // a lot may happen here, whatever happens
             throw new ConversionException(e); // wrap it into ConversionException so retrofit can process it
         }
-    }
-
-    protected String getDateFormat() {
-        return "yyyy-MM-dd";
     }
 
     @Override
@@ -60,5 +71,21 @@ public class DynamicJsonConverter implements Converter {
             out.append("\r\n");
         }
         return out.toString();
+    }
+
+    private class DateDeserializer implements JsonDeserializer<Date> {
+
+        @Override
+        public Date deserialize(JsonElement jsonElement, Type typeOF,
+                                JsonDeserializationContext context) throws JsonParseException {
+            for (String format : DATE_FORMATS) {
+                try {
+                    return new SimpleDateFormat(format, Locale.ENGLISH).parse(jsonElement.getAsString());
+                } catch (ParseException e) {
+                }
+            }
+            throw new JsonParseException("Unparseable date: \"" + jsonElement.getAsString()
+                    + "\". Supported formats: " + Arrays.toString(DATE_FORMATS));
+        }
     }
 }

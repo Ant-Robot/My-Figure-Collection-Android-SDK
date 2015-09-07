@@ -5,7 +5,6 @@ import android.content.Context;
 import com.ant_robot.mfc.api.pojo.AlterItem;
 import com.ant_robot.mfc.api.request.cookie.PersistentCookieStore;
 import com.ant_robot.mfc.api.request.json.DynamicJsonConverter;
-import com.ant_robot.mfc.api.request.json.GalleryJsonConverter;
 import com.ant_robot.mfc.api.request.service.CollectionService;
 import com.ant_robot.mfc.api.request.service.ConnexionService;
 import com.ant_robot.mfc.api.request.service.GalleryService;
@@ -43,7 +42,6 @@ public enum MFCRequest {
 
     private final OkHttpClient client;
     private final DynamicJsonConverter standartConverter;
-    private final GalleryJsonConverter galleryConverter;
     private List<HttpCookie> cookies;
     private final PostEndPoint poe;
 
@@ -131,7 +129,6 @@ public enum MFCRequest {
 
 
         standartConverter = new DynamicJsonConverter();
-        galleryConverter = new GalleryJsonConverter();
 
         restAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(client))
@@ -142,7 +139,7 @@ public enum MFCRequest {
 
         galleryAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(client))
-                .setConverter(galleryConverter)
+                .setConverter(standartConverter)
                 .setEndpoint(ROOT_URL)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();

@@ -30,7 +30,6 @@ import retrofit.mime.TypedOutput;
 public class DynamicJsonConverter implements Converter {
     private static final String[] DATE_FORMATS = new String[] {
             "yyyy-MM-dd",
-            "yyyy-MM-00",
             "EEE, dd MMM yyyy HH:mm:ss Z"
     };
 
@@ -80,7 +79,9 @@ public class DynamicJsonConverter implements Converter {
                                 JsonDeserializationContext context) throws JsonParseException {
             for (String format : DATE_FORMATS) {
                 try {
-                    return new SimpleDateFormat(format, Locale.ENGLISH).parse(jsonElement.getAsString());
+                    String dateText = jsonElement.getAsString();
+                    if (dateText!=null) dateText = dateText.replace("-00","-01");
+                    return new SimpleDateFormat(format, Locale.ENGLISH).parse(dateText);
                 } catch (ParseException e) {
                 }
             }
